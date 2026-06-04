@@ -5,8 +5,8 @@ on:
     branches:
       - main
  
-#env:
-#  VERSION: $(( $(cat version.txt) + 1 ))
+env:
+  VERSION: $(( $(cat version.txt) + 1 ))
   
 jobs:
   
@@ -24,11 +24,14 @@ jobs:
         run: |
           docker pull docker.io/smitasulikal/supermariogitops:2
 
-     - name: Run Trivy scan on image
-       uses: aquasecurity/trivy-action@master
-       with:
-          image-ref: docker.io/smitasulikal/supermariogitops:2
-          format: table
-          severity: HIGH,CRITICAL
+      - name: Get Docker Image from Docker Hub
+        run: |
+          docker pull docker.io/smitasulikal/supermariogitops:${{ env.VERSION }}
+          docker save -o supermariolatestdockerimage.tar docker.io/smitasulikal/supermariogitops:${{ env.VERSION }}
+     
+      - name: Run Trivy vulnerability scanner in tarball mode
+        uses: aquasecurity/trivy-action@master
+        with:
+          input: /github/workspace/supermariolatestdockerimage.tar
           exit-code: '1'
-          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
