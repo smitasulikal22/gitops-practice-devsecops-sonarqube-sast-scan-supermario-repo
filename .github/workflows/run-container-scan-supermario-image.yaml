@@ -24,8 +24,16 @@ jobs:
         run: |
           docker build -t docker.io/smitasulikal/supermariogitops:${{ env.VERSION }} .
           docker pull docker.io/smitasulikal/supermariogitops:${{ env.VERSION }}
-          docker save -o supermariolatestdockerimage.tar docker.io/smitasulikal/supermariogitops:${{ env.VERSION }}
-     
+          docker save  supermariolatestdockerimage.tar -o docker.io/smitasulikal/supermariogitops:${{ env.VERSION }}
+
+          
+      - name: Verify file exists
+        run: ls -l
+
+      #- name: Scan with Trivy
+      #  run: trivy image --input supermariolatestdockerimage.tar
+      
+      
       - name: Run Trivy vulnerability scanner in tarball mode
         uses: aquasecurity/trivy-action@master
         with:
