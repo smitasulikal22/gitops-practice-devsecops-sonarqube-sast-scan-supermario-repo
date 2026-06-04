@@ -22,7 +22,7 @@ jobs:
       
       - name: Get Docker Image from Docker Hub
         run: |
-          docker pull docker.io/raghuthesecurityexpert/supermariogitopsproject:2
+          docker pull docker.io/smitasulikal/supermariogitops:2
 
      - name: Run Trivy scan on image
        uses: aquasecurity/trivy-action@master
