@@ -5,8 +5,6 @@ on:
     branches:
       - main
  
-env:
-  VERSION: $(( $(cat version.txt) + 1 ))
   
 jobs:
   
@@ -25,5 +23,5 @@ jobs:
       - name: Run Trivy vulnerability scanner in tarball mode
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: docker.io/smitasulikal/supermariogitops:${{ env.VERSION }}
+          image-ref: docker.io/smitasulikal/supermariogitops:2
           format: table
