@@ -25,7 +25,7 @@ jobs:
           docker build -t docker.io/smitasulikal/supermariogitops:${{ env.VERSION }} .
           docker push docker.io/smitasulikal/supermariogitops:${{ env.VERSION }}
           docker pull docker.io/smitasulikal/supermariogitops:${{ env.VERSION }}
-          docker save  supermariolatestdockerimage.tar -o docker.io/smitasulikal/supermariogitops:${{ env.VERSION }}
+          docker save  /github/workspace/supermariolatestdockerimage.tar -o docker.io/smitasulikal/supermariogitops:${{ env.VERSION }}
 
           
       - name: Verify file exists
