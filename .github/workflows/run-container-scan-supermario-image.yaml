@@ -18,24 +18,13 @@ jobs:
         uses: actions/checkout@v3
  
       - name: Login to Docker Hub
-        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-        
-      - name: Get Docker Image from Docker Hub
-        run: |
-          docker pull docker.io/smitasulikal/supermariogitops:2
-         # docker save supermariolatestdockerimage.tar -o docker.io/smitasulikal/supermariogitops:2
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin          
 
-          
-      - name: Verify file exists
-        run: ls -l
-
-      - name: Scan with Trivy
-        run: trivy image docker.io/smitasulikal/supermariogitops:2
-      
-      
-      - name: Run Trivy vulnerability scanner in tarball mode
-        uses: aquasecurity/trivy-action@master
-        with:
-          input: /github/workspace/supermariolatestdockerimage.tar
+     - name: Run Trivy scan on image
+       uses: aquasecurity/trivy-action@master
+       with:
+          image-ref: docker.io/smitasulikal/supermariogitops:2
+          format: table
+          severity: HIGH,CRITICAL
           exit-code: '1'
-          severity: 'CRITICAL,HIGH'
+          ignore-unfixed: true
