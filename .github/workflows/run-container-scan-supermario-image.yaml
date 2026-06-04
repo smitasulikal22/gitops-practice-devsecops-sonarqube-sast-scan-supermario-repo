@@ -23,14 +23,14 @@ jobs:
       - name: Get Docker Image from Docker Hub
         run: |
           docker pull docker.io/smitasulikal/supermariogitops:2
-          docker save supermariolatestdockerimage.tar -o docker.io/smitasulikal/supermariogitops:2
+         # docker save supermariolatestdockerimage.tar -o docker.io/smitasulikal/supermariogitops:2
 
           
       - name: Verify file exists
         run: ls -l
 
       - name: Scan with Trivy
-        run: trivy image --input supermariolatestdockerimage.tar
+        run: trivy image docker.io/smitasulikal/supermariogitops:2
       
       
       - name: Run Trivy vulnerability scanner in tarball mode
