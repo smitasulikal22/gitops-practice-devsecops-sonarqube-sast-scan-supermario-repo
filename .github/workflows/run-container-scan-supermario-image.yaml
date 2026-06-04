@@ -5,8 +5,8 @@ on:
     branches:
       - main
  
-env:
-  VERSION: $(( $(cat version.txt) + 1 ))
+#env:
+#  VERSION: $(( $(cat version.txt) + 1 ))
   
 jobs:
   
@@ -22,8 +22,6 @@ jobs:
         
       - name: Get Docker Image from Docker Hub
         run: |
-          #docker build -t docker.io/smitasulikal/supermariogitops:${{ env.VERSION }} .
-          #docker push docker.io/smitasulikal/supermariogitops:${{ env.VERSION }}
           docker pull docker.io/smitasulikal/supermariogitops:2
           docker save -o docker.io/smitasulikal/supermariogitops:2 supermariolatestdockerimage.tar
 
