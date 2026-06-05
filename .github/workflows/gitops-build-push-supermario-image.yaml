@@ -5,8 +5,8 @@ name: "Build and push Super Mario Docker image with dynamic tag to Docker Hub"
 #    branches:
 #      - main
  
-env:
-  VERSION: $(( $(cat version.txt) + 1 ))
+#env:
+#  VERSION: $(( $(cat version.txt) + 1 ))
   
 jobs:
   

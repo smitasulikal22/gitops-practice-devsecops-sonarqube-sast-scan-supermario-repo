@@ -62,7 +62,7 @@ jobs:
       - name: Update Deployment YAML
         run: |
           git pull
-          echo ${{ env.VERSION }} > version.txt
+          echo ${{ env.VERSION }}
           sed -i "s|image: docker.io/smitasulikal/supermariogitops:.*$|image: docker.io/smitasulikal/supermariogitops:${{ env.VERSION }}|" deployment.yaml
           echo ${{ env.VERSION }} > version.txt
           CURRENT_VERSION=$(cat version.txt)
