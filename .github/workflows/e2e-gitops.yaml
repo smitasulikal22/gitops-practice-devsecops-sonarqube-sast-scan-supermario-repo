@@ -42,7 +42,7 @@ jobs:
       - name: Run Trivy vulnerability scanner in tarball mode
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: docker.io/smitasulikal/supermariogitops:${{ env.VERSION }}
+          image-ref: docker.io/smitasulikal/supermariogitops:3
           format: table
           
   update_k8s_yaml_version_file_with_latest_image_tag:
