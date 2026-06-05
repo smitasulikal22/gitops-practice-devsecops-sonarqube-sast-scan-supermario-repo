@@ -57,11 +57,13 @@ jobs:
         run: |
            git config --global user.email "${{ secrets.GIT_EMAIL}}"
            git config --global user.name "${{ secrets.GIT_USERNAME}}"
- 
+
+
       - name: Update Deployment YAML
         run: |
           git pull
-          sed -i "s|image: smitasulikal/supermariogitops:.*$|image: smitasulikal/supermariogitops:${{ env.VERSION }}|" deployment.yaml
+          echo ${{ env.VERSION }} > version.txt
+          sed -i "s|image: smitasulikal/supermariogitops:.*$|image: smitasulikal/supermariogitops::${{ env.VERSION }}|" deployment.yaml
           echo ${{ env.VERSION }} > version.txt
           CURRENT_VERSION=$(cat version.txt)
           git add deployment.yaml version.txt
