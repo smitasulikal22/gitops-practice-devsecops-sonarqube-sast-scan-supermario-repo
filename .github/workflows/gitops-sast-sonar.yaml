@@ -7,7 +7,6 @@ on:
   
 jobs:
 
-
   sonarqube_sast_scan:
     runs-on: ubuntu-latest
 
